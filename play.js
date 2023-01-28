@@ -35,6 +35,8 @@ function setBoard() {
   generateFood();
   //set snakeSpeed
   snakeSpeed = 200;
+  //set snake body to have nothing
+  snakeBody = [];
   //make sure to update the board every 10 mili sec
   boardupdater = setInterval(upDateBoard, 10); //every 50 ms all the pixles are re-rendered
   //set score to 0
@@ -47,8 +49,15 @@ function upDateBoard() {
   context.fillRect(0, 0, board.width, board.height);
   context.fillStyle = "red";
   context.fillRect(foodC, foodR, blockSize, blockSize);
+  context.fillStyle = "green";
+  for (item of snakeBody) {
+    R = item[0];
+    C = item[1];
+    context.fillRect(C, R, blockSize, blockSize);
+  }
   context.fillStyle = "lime";
   context.fillRect(snakeC, snakeR, blockSize, blockSize);
+
   //fillRect(x,y,xFillSize,yFillSize) =>here x connresponds to the number of cols in board and y corresponds to number of rows in board
 }
 
@@ -101,8 +110,10 @@ function play(e) {
 }
 
 function up() {
+  moveSnakeBody();
   snakeR = snakeR - 1 * blockSize;
   if ((snakeR == foodR) & (snakeC == foodC)) {
+    snakeBody.push([foodR, foodC]);
     generateFood();
     score += 1;
     snakeSpeed -= 1;
@@ -120,8 +131,10 @@ function up() {
 }
 
 function down() {
+  moveSnakeBody();
   snakeR = snakeR + 1 * blockSize;
   if ((snakeR == foodR) & (snakeC == foodC)) {
+    snakeBody.push([foodR, foodC]);
     generateFood();
     score += 1;
     snakeSpeed -= 1;
@@ -139,8 +152,10 @@ function down() {
 }
 
 function left() {
+  moveSnakeBody();
   snakeC = snakeC - 1 * blockSize;
   if ((snakeR == foodR) & (snakeC == foodC)) {
+    snakeBody.push([foodR, foodC]);
     generateFood();
     score += 1;
     snakeSpeed -= 1;
@@ -158,8 +173,10 @@ function left() {
 }
 
 function right() {
+  moveSnakeBody();
   snakeC = snakeC + 1 * blockSize;
   if ((snakeR == foodR) & (snakeC == foodC)) {
+    snakeBody.push([foodR, foodC]);
     generateFood();
     score += 1;
     snakeSpeed -= 1;
@@ -178,4 +195,18 @@ function right() {
 function displayScore() {
   let scoreDisplay = document.getElementById("score");
   scoreDisplay.innerHTML = "Score:" + score;
+}
+
+function moveSnakeBody() {
+  n = snakeBody.length;
+
+  temp = snakeBody[n - 1];
+  snakeBody[n - 1] = [snakeR, snakeC];
+  i = n - 2;
+  while (i >= 0) {
+    cur = snakeBody[i];
+    snakeBody[i] = temp;
+    temp = cur;
+    i -= 1;
+  }
 }
