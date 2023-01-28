@@ -1,7 +1,7 @@
 
 # Snake Game 🐍 in Vanilla JavaScript
-* "Space" => Pause/Resume 
-* "Arrow keys" => Move the snake towards food 
+* "Space" => Pause
+* "Arrow keys" => Start/Resume [Move the snake] 
 
 ## Screenshots
 
