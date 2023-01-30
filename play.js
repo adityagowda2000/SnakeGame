@@ -47,8 +47,6 @@ function setBoard() {
 function upDateBoard() {
   context.fillStyle = "black";
   context.fillRect(0, 0, board.width, board.height);
-  context.fillStyle = "red";
-  context.fillRect(foodC, foodR, blockSize, blockSize);
   context.fillStyle = "green";
   for (item of snakeBody) {
     R = item[0];
@@ -57,6 +55,9 @@ function upDateBoard() {
   }
   context.fillStyle = "lime";
   context.fillRect(snakeC, snakeR, blockSize, blockSize);
+
+  context.fillStyle = "red";
+  context.fillRect(foodC, foodR, blockSize, blockSize);
 
   //fillRect(x,y,xFillSize,yFillSize) =>here x connresponds to the number of cols in board and y corresponds to number of rows in board
 }
@@ -131,7 +132,7 @@ function up() {
 }
 
 function down() {
-  moveSnakeBody();
+  if (moveSnakeBody());
   snakeR = snakeR + 1 * blockSize;
   if ((snakeR == foodR) & (snakeC == foodC)) {
     snakeBody.push([foodR, foodC]);
