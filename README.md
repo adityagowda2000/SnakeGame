@@ -1,7 +1,7 @@
-
 # Snake Game 🐍 in Vanilla JavaScript
-* "Space" => Pause
-* "Arrow keys" => Start/Resume [Move the snake] 
+
+- "Space" => Pause
+- "Arrow keys" => Start/Resume [Move the snake]
 
 ## Screenshots
 
@@ -10,6 +10,3 @@
 ## Features to add
 
 - Detect Body Collision
-- Generate food only in the grid positions where snake/snake body is not present
-
-
